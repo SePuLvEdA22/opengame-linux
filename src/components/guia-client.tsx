@@ -29,10 +29,13 @@ export function GuiaClient({ initialId }: { initialId: number }) {
       <div className="lg:col-span-8 flex flex-col gap-4">
         <div className="steel-card rounded-xl p-5">
           <label htmlFor="guia-juego" className="font-mono text-[11px] text-slate-500">JUEGO</label>
-          <select id="guia-juego" value={gameId} onChange={(e) => { setGameId(Number(e.target.value)); setProton(null); }}
-            className="mt-1 w-full h-10 rounded bg-background border border-outline px-3 text-sm">
-            {CATALOG.map((g) => <option key={g.id} value={g.id}>{g.nombre} — {g.protonVersion}</option>)}
-          </select>
+          <span className="relative block mt-1">
+            <select id="guia-juego" value={gameId} onChange={(e) => { setGameId(Number(e.target.value)); setProton(null); }}
+              className="w-full h-10 rounded bg-background border border-outline pl-3 pr-9 text-sm appearance-none">
+              {CATALOG.map((g) => <option key={g.id} value={g.id}>{g.nombre} — {g.protonVersion}</option>)}
+            </select>
+            <svg aria-hidden viewBox="0 0 16 16" className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </span>
         </div>
         <fieldset className="steel-card rounded-xl p-5">
           <legend className="font-semibold text-white px-1">Motor de compatibilidad (Paso 3/5)</legend>

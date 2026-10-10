@@ -78,19 +78,25 @@ export function DiagnosticoClient() {
         <h2 className="font-semibold text-white mt-2">2. Selección manual / Windows</h2>
         <div className="grid grid-cols-2 gap-2 mt-3 text-xs">
           <label className="flex flex-col gap-1">GPU
-            <select value={manual.gpu} onChange={(e) => setManual({ ...manual, gpu: e.target.value })}
-              className="h-9 rounded bg-background px-2 border border-outline">
-              <option>NVIDIA GTX 1050 (2GB)</option>
-              <option>AMD Radeon RX 570 (4GB)</option>
-              <option>Intel Iris Xe Graphics</option>
-              <option>NVIDIA GTX 750 Ti (2GB)</option>
-            </select>
+            <span className="relative block">
+              <select value={manual.gpu} onChange={(e) => setManual({ ...manual, gpu: e.target.value })}
+                className="h-9 w-full rounded bg-background pl-2 pr-9 border border-outline appearance-none">
+                <option>NVIDIA GTX 1050 (2GB)</option>
+                <option>AMD Radeon RX 570 (4GB)</option>
+                <option>Intel Iris Xe Graphics</option>
+                <option>NVIDIA GTX 750 Ti (2GB)</option>
+              </select>
+              <svg aria-hidden viewBox="0 0 16 16" className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </span>
           </label>
           <label className="flex flex-col gap-1">RAM (GB)
-            <select value={manual.ramGb} onChange={(e) => setManual({ ...manual, ramGb: e.target.value })}
-              className="h-9 rounded bg-background px-2 border border-outline">
-              <option>4</option><option>8</option><option>12</option><option>16</option>
-            </select>
+            <span className="relative block">
+              <select value={manual.ramGb} onChange={(e) => setManual({ ...manual, ramGb: e.target.value })}
+                className="h-9 w-full rounded bg-background pl-2 pr-9 border border-outline appearance-none">
+                <option>4</option><option>8</option><option>12</option><option>16</option>
+              </select>
+              <svg aria-hidden viewBox="0 0 16 16" className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </span>
           </label>
         </div>
         <div className="flex flex-wrap gap-2 mt-3">
