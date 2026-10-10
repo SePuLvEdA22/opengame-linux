@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #0d1117;
+    color: #e6edf3;
+    font-family: "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0d1117;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #21262d;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #30363d;
+  }
+  :focus-visible {
+    outline: 2px solid #58a6ff;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .steel-card {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+  }
+  .steel-card:hover {
+    border-color: #484f58;
+  }
+  .mono-tag {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+  }
+}

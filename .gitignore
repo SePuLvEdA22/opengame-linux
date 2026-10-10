@@ -1,0 +1,20 @@
+# ---> Node
+node_modules/
+.next/
+out/
+dist/
+*.tsbuildinfo
+next-env.d.ts
+
+# ---> Vercel
+.vercel/
+
+# ---> Env (nunca subir credenciales)
+.env
+.env*.local
+!.env.example
+
+# ---> OS / editor
+.DS_Store
+*.log
+coverage/
