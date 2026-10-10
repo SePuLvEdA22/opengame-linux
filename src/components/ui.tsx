@@ -2,10 +2,10 @@ import Link from "next/link";
 import type { CompatEstado } from "@/lib/games-data";
 
 const MAP: Record<CompatEstado, { label: string; cls: string }> = {
-  funciona: { label: "PLATINO / JUGABLE", cls: "bg-emerald-950/50 text-emerald-400 border-emerald-800/40" },
-  funciona_con_ajustes: { label: "TWEAK FÁCIL", cls: "bg-amber-950/50 text-amber-300 border-amber-800/40" },
-  no_funciona: { label: "BLOQUEADO", cls: "bg-rose-950/50 text-rose-300 border-rose-800/40" },
-  desconocido: { label: "DESCONOCIDO", cls: "bg-surface-container-high text-slate-400 border-outline" },
+  funciona: { label: "Funciona", cls: "bg-emerald-950/50 text-emerald-400 border-emerald-800/40" },
+  funciona_con_ajustes: { label: "Con 1 ajuste", cls: "bg-amber-950/50 text-amber-300 border-amber-800/40" },
+  no_funciona: { label: "No funciona", cls: "bg-rose-950/50 text-rose-300 border-rose-800/40" },
+  desconocido: { label: "Sin datos", cls: "bg-surface-container-high text-slate-400 border-outline" },
 };
 
 export function StatusBadge({ estado }: { estado: CompatEstado }) {

@@ -20,7 +20,7 @@ export default async function Ficha({ params }: { params: Promise<{ id: string }
       <main id="contenido">
         <section className="border-b border-outline bg-[#0d1117]">
           <div className="max-w-7xl mx-auto px-4 py-8">
-            <p className="font-mono text-xs text-slate-500">BASE DE DATOS / {game.genero.toUpperCase()} / APPID: {game.steamAppid ?? "—"}</p>
+            <p className="font-mono text-xs text-slate-500">{game.genero}</p>
             <h1 className="text-3xl font-bold text-white mt-2">{game.nombre}</h1>
             <div className="flex flex-wrap gap-2 mt-3">
               <StatusBadge estado={game.estado} />
@@ -63,6 +63,7 @@ export default async function Ficha({ params }: { params: Promise<{ id: string }
               <div className="bg-background border border-outline rounded p-2"><dt className="font-mono text-[10px] text-slate-500">RUNNER</dt><dd className="font-mono text-primary">{game.protonVersion}</dd></div>
               <div className="bg-background border border-outline rounded p-2"><dt className="font-mono text-[10px] text-slate-500">ANTI-CHEAT / DRM</dt><dd className="text-white">{game.anticheat ?? "—"} / {game.drm ?? "—"}</dd></div>
               <div className="bg-background border border-outline rounded p-2"><dt className="font-mono text-[10px] text-slate-500">RAM</dt><dd className="font-mono text-white">{game.reqMinRamGb} GB mín</dd><dd className="text-slate-500">Ideal distro ligera 8 GB</dd></div>
+              <div className="bg-background border border-outline rounded p-2"><dt className="font-mono text-[10px] text-slate-500">FICHA STEAM</dt><dd className="font-mono text-slate-300">{game.steamAppid ?? "Sin ficha (solo launcher externo)"}</dd></div>
             </dl>
           </aside>
         </div>

@@ -29,8 +29,8 @@ export default function Home() {
             </div>
             <div className="flex flex-wrap gap-1.5 mt-2.5 pt-2.5 border-t border-surface-container-high text-xs">
               <span className="text-slate-500 font-mono mr-1">Filtros:</span>
-              <Link href="/buscar?estado=funciona" className="px-2.5 py-1 rounded-md bg-surface-container-high text-slate-200 border border-outline">100% Plug &amp; Play</Link>
-              <Link href="/buscar?estado=funciona_con_ajustes" className="px-2.5 py-1 rounded-md bg-surface-container text-slate-400 border border-outline">Con Ajustes</Link>
+              <Link href="/buscar?estado=funciona" className="px-2.5 py-1 rounded-md bg-surface-container-high text-slate-200 border border-outline">Funciona sin tocar nada</Link>
+              <Link href="/buscar?estado=funciona_con_ajustes" className="px-2.5 py-1 rounded-md bg-surface-container text-slate-400 border border-outline">Con 1 ajuste</Link>
               <Link href="/buscar?launcher=Steam" className="px-2.5 py-1 rounded-md bg-surface-container text-slate-400 border border-outline">Steam</Link>
               <Link href="/buscar?launcher=Epic" className="px-2.5 py-1 rounded-md bg-surface-container text-slate-400 border border-outline">Epic Games</Link>
             </div>
@@ -38,9 +38,9 @@ export default function Home() {
         </section>
 
         <section aria-label="Simbología de compatibilidad" className="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="steel-card rounded-xl p-5"><StatusBadge estado="funciona" /><p className="text-xs text-slate-400 mt-2">Clic en Jugar y corre. Sin terminal.</p></div>
-          <div className="steel-card rounded-xl p-5"><StatusBadge estado="funciona_con_ajustes" /><p className="text-xs text-slate-400 mt-2">Proton-GE o parámetro pegable.</p></div>
-          <div className="steel-card rounded-xl p-5"><StatusBadge estado="no_funciona" /><p className="text-xs text-slate-400 mt-2">Anti-cheat kernel. No forzar.</p></div>
+          <div className="steel-card rounded-xl p-5"><StatusBadge estado="funciona" /><p className="text-xs text-slate-400 mt-2">Instalas y juegas, como en Windows. Sin tocar nada raro.</p></div>
+          <div className="steel-card rounded-xl p-5"><StatusBadge estado="funciona_con_ajustes" /><p className="text-xs text-slate-400 mt-2">Funciona copiando un ajuste que te damos listo para pegar.</p></div>
+          <div className="steel-card rounded-xl p-5"><StatusBadge estado="no_funciona" /><p className="text-xs text-slate-400 mt-2">El creador lo bloquea en Linux. Mejor no insistir: hay riesgo de baneo.</p></div>
         </section>
 
         <section aria-label="Juegos populares" className="max-w-7xl mx-auto px-4 pb-12 grid grid-cols-1 md:grid-cols-2 gap-4">

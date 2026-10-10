@@ -26,7 +26,7 @@ export default async function Buscar({ searchParams }: Props) {
         <h1 className="text-xl font-semibold text-white">
           {sp.q ? <>Resultados para “{sp.q}” ({result.total})</> : <>Catálogo ({result.total} juegos)</>}
         </h1>
-        <p className="text-xs text-slate-400 font-mono mt-1">Paginación RNF-04 · {result.totalPages} páginas</p>
+        <p className="text-xs text-slate-400 font-mono mt-1">{result.total} juegos · Página {result.page} de {result.totalPages}</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
           {result.items.map((g) => <GameCard key={g.id} game={g} />)}
         </div>
