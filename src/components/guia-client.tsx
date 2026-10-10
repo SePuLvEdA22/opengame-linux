@@ -28,7 +28,7 @@ export function GuiaClient({ initialId }: { initialId: number }) {
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
       <div className="lg:col-span-8 flex flex-col gap-4">
         <div className="steel-card rounded-xl p-5">
-          <label htmlFor="guia-juego" className="font-mono text-[11px] text-slate-500">JUEGO</label>
+          <label htmlFor="guia-juego" className="font-mono text-xs text-slate-500">JUEGO</label>
           <span className="relative block mt-1">
             <select id="guia-juego" value={gameId} onChange={(e) => { setGameId(Number(e.target.value)); setProton(null); }}
               className="w-full h-10 rounded bg-background border border-outline pl-3 pr-9 text-sm appearance-none">
@@ -63,7 +63,7 @@ export function GuiaClient({ initialId }: { initialId: number }) {
         </fieldset>
       </div>
       <aside className="lg:col-span-4 steel-card rounded-xl p-5 h-fit lg:sticky lg:top-20">
-        <p className="font-mono text-[11px] text-slate-500">PERFIL GENERADO</p>
+        <p className="font-mono text-xs text-slate-500">PERFIL GENERADO</p>
         <h2 className="font-semibold text-white">{profile.juego}</h2>
         <p className="font-mono text-xs text-primary">{profile.launcher} · {activeProton}</p>
         <pre className="mt-3 font-mono text-xs text-emerald-300 bg-background border border-outline rounded-lg p-3 break-all whitespace-pre-wrap">{cmd}</pre>
@@ -74,7 +74,7 @@ export function GuiaClient({ initialId }: { initialId: number }) {
         <ol className="text-xs text-slate-400 mt-4 space-y-1 list-decimal list-inside">
           {profile.pasos.map((s, i) => <li key={i}>{s}</li>)}
         </ol>
-        <p className="font-mono text-[11px] text-slate-500 mt-3">100% reversible · sin terminal obligatorio</p>
+        <p className="font-mono text-xs text-slate-500 mt-3">100% reversible · sin terminal obligatorio</p>
       </aside>
     </div>
   );

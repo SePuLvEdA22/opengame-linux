@@ -48,12 +48,12 @@ export function DiagnosticoClient() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
       <div className="steel-card rounded-xl p-5">
-        <p className="font-mono text-[11px] text-emerald-400 border border-emerald-800/40 rounded px-2 py-0.5 inline-block">Recomendado · 1.84 MB · Sin root · 100% local</p>
+        <p className="font-mono text-xs text-emerald-400 border border-emerald-800/40 rounded px-2 py-0.5 inline-block">Recomendado · 1.84 MB · Sin root · 100% local</p>
         <h2 className="font-semibold text-white mt-2">1. Detector automático</h2>
         <div className="flex gap-2 mt-3">
           <a href="/api/cli/download" className="px-4 py-2 rounded-lg bg-primary text-[#0d1117] font-semibold text-xs">Descargar OpenGame-Detect.sh</a>
         </div>
-        <p className="font-mono text-[11px] text-slate-500 mt-2">Ejecuta: <code className="text-slate-300">sh OpenGame-Detect.sh</code> y pega el JSON:</p>
+        <p className="font-mono text-xs text-slate-500 mt-2">Ejecuta: <code className="text-slate-300">sh OpenGame-Detect.sh</code> y pega el JSON:</p>
         <label htmlFor="cli-json" className="sr-only">Pegar JSON del detector</label>
         <textarea id="cli-json" rows={5} value={jsonText} onChange={(e) => setJsonText(e.target.value)}
           className="w-full mt-2 font-mono text-xs bg-background border border-outline rounded-lg p-3 text-emerald-300" />
@@ -74,7 +74,7 @@ export function DiagnosticoClient() {
       </div>
 
       <div className="steel-card rounded-xl p-5">
-        <p className="font-mono text-[11px] text-slate-400 border border-outline rounded px-2 py-0.5 inline-block">Modo offline · Manual</p>
+        <p className="font-mono text-xs text-slate-400 border border-outline rounded px-2 py-0.5 inline-block">Modo offline · Manual</p>
         <h2 className="font-semibold text-white mt-2">2. Selección manual / Windows</h2>
         <div className="grid grid-cols-2 gap-2 mt-3 text-xs">
           <label className="flex flex-col gap-1">GPU
@@ -109,7 +109,7 @@ export function DiagnosticoClient() {
           }} className="px-4 py-2 rounded-lg bg-surface-container border border-outline text-xs">Estimar este PC (Windows)</button>
         </div>
         {error && <p role="alert" className="text-xs text-rose-300 mt-3">{error}</p>}
-        {nota && <p className="text-[11px] text-amber-300 mt-3">{nota}</p>}
+        {nota && <p className="text-xs text-amber-300 mt-3">{nota}</p>}
       </div>
 
       {matriz && (
@@ -131,7 +131,7 @@ export function DiagnosticoClient() {
               ))}
             </tbody>
           </table>
-          <p className="p-4 text-[11px] font-mono text-slate-500">¿Equipo justo? Mira <a href="/adopcion" className="text-primary">distros livianas recomendadas</a> (Mint XFCE 4–8 GB, Bazzite 8 GB+, Lubuntu 2–4 GB).</p>
+          <p className="p-4 text-xs font-mono text-slate-500">¿Equipo justo? Mira <a href="/adopcion" className="text-primary">distros livianas recomendadas</a> (Mint XFCE 4–8 GB, Bazzite 8 GB+, Lubuntu 2–4 GB).</p>
         </div>
       )}
     </div>

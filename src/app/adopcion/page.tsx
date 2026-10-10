@@ -18,7 +18,7 @@ export default function AdopcionPage() {
             <article key={d.id} className="steel-card rounded-xl p-5">
               <h2 className="font-semibold text-white">{d.nombre} <span className="font-mono text-xs text-primary">{d.edicion}</span></h2>
               <p className="text-xs text-slate-400 mt-2">{d.descripcion}</p>
-              <p className="font-mono text-[11px] text-emerald-400 mt-2">{d.driverNota} · Mín. {d.ramMinGb} GB</p>
+              <p className="font-mono text-xs text-emerald-400 mt-2">{d.driverNota} · Mín. {d.ramMinGb} GB</p>
             </article>
           ))}
         </div>

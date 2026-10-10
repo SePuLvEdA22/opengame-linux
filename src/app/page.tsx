@@ -44,10 +44,10 @@ export default function Home() {
           <p className="inline-flex px-3 py-1 rounded-full bg-surface-container border border-outline text-xs font-mono text-slate-300 mb-6">
             Optimizado para laptops antiguas, iGPUs y 4–8 GB RAM
           </p>
-          <h1 className="font-semibold text-3xl sm:text-5xl tracking-tight text-white mb-4">
+          <h1 className="font-semibold text-3xl sm:text-5xl tracking-tight text-white mb-4 text-balance max-w-[680px] mx-auto">
             ¿Tu juego de Windows corre en <span className="text-primary">Linux</span>?
           </h1>
-          <p className="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto mb-8">
+          <p className="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto mb-8 text-pretty">
             Descúbrelo en segundos antes de migrar. Estado, causa del fallo y soluciones verificadas.
           </p>
           <form action="/buscar" method="get" role="search" className="w-full max-w-2xl mx-auto bg-surface-container border border-outline p-2 rounded-xl">
@@ -89,7 +89,7 @@ export default function Home() {
                   {f.q}
                   <span aria-hidden className="text-primary shrink-0 group-open:rotate-180 transition-transform">▾</span>
                 </summary>
-                <p className="text-xs text-slate-400 mt-2 leading-relaxed">{f.a}</p>
+                <p className="text-xs text-slate-400 mt-2 leading-relaxed text-pretty">{f.a}</p>
               </details>
             ))}
           </div>

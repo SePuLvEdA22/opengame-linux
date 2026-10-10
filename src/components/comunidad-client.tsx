@@ -56,14 +56,14 @@ export function ComunidadClient() {
           return (
             <article key={r.id} className="steel-card rounded-lg p-5">
               <div className="flex justify-between gap-2">
-                <p className="font-medium text-sm text-white">{r.autor} <span className="font-mono text-[11px] text-slate-500">· {g?.nombre}</span></p>
+                <p className="font-medium text-sm text-white">{r.autor} <span className="font-mono text-xs text-slate-500">· {g?.nombre}</span></p>
                 <span className={`font-mono text-xs px-2 py-0.5 rounded border ${r.estado === "verificada" ? "text-emerald-400 border-emerald-800/40 bg-emerald-950/50" : "text-amber-300 border-amber-800/40"}`}>
                   {r.estado === "verificada" ? "✓ Solución verificada" : r.estado}
                 </span>
               </div>
-              <p className="font-mono text-[11px] text-primary mt-1">GPU: {r.gpu} · {r.fps} FPS</p>
+              <p className="font-mono text-xs text-primary mt-1">GPU: {r.gpu} · {r.fps} FPS</p>
               <p className="text-xs text-slate-400 bg-background border border-outline rounded p-3 mt-2">“{r.texto}”</p>
-              <div className="flex justify-between items-center mt-3 font-mono text-[11px] text-slate-500">
+              <div className="flex justify-between items-center mt-3 font-mono text-xs text-slate-500">
                 <span>{r.fecha}</span>
                 <span className="flex gap-1">
                   <button onClick={() => votar(r.id)} className="px-2.5 py-1 rounded bg-surface-container-high border border-outline" aria-label={`Marcar útil reporte de ${r.autor}`}>

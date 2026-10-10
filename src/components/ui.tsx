@@ -11,7 +11,7 @@ const MAP: Record<CompatEstado, { label: string; cls: string }> = {
 export function StatusBadge({ estado }: { estado: CompatEstado }) {
   const m = MAP[estado];
   return (
-    <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-[11px] font-mono font-medium border ${m.cls}`}>
+    <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs font-mono font-medium border ${m.cls}`}>
       <span aria-hidden className="w-1.5 h-1.5 rounded-full bg-current" />
       {m.label}
     </span>
@@ -38,9 +38,9 @@ export function SiteHeader({ active }: { active?: string }) {
             <span aria-hidden className="flex items-center justify-center w-9 h-9 rounded-xl bg-surface-container-high border border-outline font-mono text-sm text-primary">▸_</span>
             <span className="flex flex-col leading-tight">
               <span className="font-semibold text-sm text-white">OpenGame<span className="text-primary">Linux</span>
-                <span className="ml-2 font-mono text-[10px] font-medium px-1.5 py-0.5 rounded bg-surface-container text-slate-400 border border-outline align-middle">v2.4</span>
+                <span className="ml-2 font-mono text-xs font-medium px-1.5 py-0.5 rounded bg-surface-container text-slate-400 border border-outline align-middle">v2.4</span>
               </span>
-              <span className="text-[11px] text-slate-500 hidden sm:inline">Tu biblioteca de Windows, optimizada para Linux</span>
+              <span className="text-xs text-slate-500 hidden sm:inline">Tu biblioteca de Windows, optimizada para Linux</span>
             </span>
           </Link>
           <nav aria-label="Principal" className="hidden lg:flex items-center gap-1 bg-surface-container-lowest/60 border border-outline rounded-xl p-1">
@@ -52,7 +52,7 @@ export function SiteHeader({ active }: { active?: string }) {
             {link("/cuenta", "Cuenta", "cuenta")}
           </nav>
           <span className="flex items-center gap-2 shrink-0">
-            <span className="hidden xl:flex items-center gap-2 font-mono text-[11px] text-slate-400 border border-outline rounded-lg px-2.5 py-1.5 bg-surface-container">
+            <span className="hidden xl:flex items-center gap-2 font-mono text-xs text-slate-400 border border-outline rounded-lg px-2.5 py-1.5 bg-surface-container">
               <span className="text-slate-200">VK 1.3</span><span aria-hidden className="text-slate-600">/</span><span className="text-slate-200">GE-Proton 9</span>
             </span>
             <Link href="/diagnostico" className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold text-[#0d1117] bg-primary hover:brightness-110 transition">
