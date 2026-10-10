@@ -4,6 +4,7 @@ import { SiteHeader, StatusBadge } from "@/components/ui";
 import { CopyButton } from "@/components/copy-button";
 import { getGameById } from "@/lib/search";
 import { verifiedSolutions } from "@/lib/reports";
+import { buildComparator } from "@/lib/comparator";
 
 export const revalidate = 3600;
 
@@ -12,6 +13,7 @@ export default async function Ficha({ params }: { params: Promise<{ id: string }
   const game = getGameById(Number(id));
   if (!game) notFound();
   const sols = verifiedSolutions(game.id);
+  const comp = buildComparator(game);
   return (
     <>
       <SiteHeader active="buscador" />
@@ -34,11 +36,17 @@ export default async function Ficha({ params }: { params: Promise<{ id: string }
         </section>
         <div className="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-4">
           <div className="lg:col-span-2 steel-card rounded-lg p-5">
-            <h2 className="font-semibold text-white">Guía rápida en 3 pasos</h2>
-            <ol className="text-xs text-slate-400 mt-3 space-y-2 list-decimal list-inside">
-              <li>Forzar <span className="font-mono text-primary">{game.protonVersion}</span> en Propiedades → Compatibilidad.</li>
-              <li>Pegar en parámetros: <code className="font-mono text-primary break-all">{game.envVars || "(nativo, sin parámetros)"}</code></li>
-              <li>Ajustes in-game: DirectX 11, MSAA OFF, FXAA ON (equipos 4–8 GB).</li>
+            <h2 className="font-semibold text-white">Guía rápida en 3 pasos <span className="font-mono text-[11px] text-slate-500">· ~2 min</span></h2>
+            <ol className="text-xs text-slate-400 mt-3 space-y-3 list-none">
+              <li className="bg-background border border-outline rounded p-3"><strong className="text-white">1. Forzar {game.protonVersion}</strong><br />Biblioteca → Propiedades → Compatibilidad → “Forzar uso de compatibilidad”.</li>
+              <li className="bg-background border border-outline rounded p-3"><strong className="text-white">2. Parámetros Vulkan (quita stutter)</strong><br /><code className="font-mono text-primary break-all">{game.envVars || "(nativo, sin parámetros)"}</code></li>
+              <li className="bg-background border border-outline rounded p-3"><strong className="text-white">3. In-game para 4–8 GB</strong>
+                <span className="grid grid-cols-3 gap-1 mt-2 font-mono text-[11px]">
+                  <span className="border border-outline rounded p-1">DX11 <em className="text-primary not-italic">DirectX 11</em></span>
+                  <span className="border border-outline rounded p-1">MSAA <em className="text-rose-300 not-italic">OFF</em></span>
+                  <span className="border border-outline rounded p-1">FXAA <em className="text-emerald-400 not-italic">ON</em></span>
+                </span>
+              </li>
             </ol>
             {game.envVars && (
               <div className="mt-3 flex flex-wrap gap-2">
@@ -49,15 +57,27 @@ export default async function Ficha({ params }: { params: Promise<{ id: string }
             )}
           </div>
           <aside className="steel-card rounded-lg p-5">
-            <h2 className="font-semibold text-sm text-white">Telemetría</h2>
-            <dl className="text-xs font-mono text-slate-400 mt-2 space-y-1">
-              <div className="flex justify-between"><dt>Anti-cheat</dt><dd className="text-slate-200">{game.anticheat ?? "—"}</dd></div>
-              <div className="flex justify-between"><dt>DRM</dt><dd className="text-slate-200">{game.drm ?? "—"}</dd></div>
-              <div className="flex justify-between"><dt>RAM mín.</dt><dd className="text-slate-200">{game.reqMinRamGb} GB</dd></div>
-              <div className="flex justify-between"><dt>Launcher</dt><dd className="text-slate-200">{game.launcher.join(", ")}</dd></div>
+            <h2 className="font-semibold text-sm text-white">Telemetría banco de pruebas</h2>
+            <dl className="mt-3 space-y-2 text-xs">
+              <div className="bg-background border border-outline rounded p-2"><dt className="font-mono text-[10px] text-slate-500">FPS ESTIMADOS</dt><dd className="font-mono text-white">{game.fpsEstimado}</dd><dd className="text-slate-500">{game.fpsDetalle}</dd></div>
+              <div className="bg-background border border-outline rounded p-2"><dt className="font-mono text-[10px] text-slate-500">RUNNER</dt><dd className="font-mono text-primary">{game.protonVersion}</dd></div>
+              <div className="bg-background border border-outline rounded p-2"><dt className="font-mono text-[10px] text-slate-500">ANTI-CHEAT / DRM</dt><dd className="text-white">{game.anticheat ?? "—"} / {game.drm ?? "—"}</dd></div>
+              <div className="bg-background border border-outline rounded p-2"><dt className="font-mono text-[10px] text-slate-500">RAM</dt><dd className="font-mono text-white">{game.reqMinRamGb} GB mín</dd><dd className="text-slate-500">Ideal distro ligera 8 GB</dd></div>
             </dl>
           </aside>
         </div>
+        {comp && (
+          <div className="max-w-7xl mx-auto px-4 pb-4">
+            <div className="steel-card rounded-lg p-5">
+              <h2 className="font-semibold text-white text-sm">Windows 10 vs Linux en PC modesta ({game.reqMinRamGb} GB)</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3 text-xs">
+                <div><p className="font-mono text-emerald-400">Linux + tweaks · {comp.linuxFps} FPS · {comp.linuxRamFreeGb} GB libres</p><div className="h-2 rounded bg-background border border-outline mt-1"><div className="h-full bg-emerald-600 rounded" style={{ width: `${Math.min(100, comp.linuxFps)}%` }} /></div></div>
+                <div><p className="font-mono text-slate-500">Windows 10 stock · {comp.windowsFps} FPS · {comp.windowsRamFreeGb} GB libres</p><div className="h-2 rounded bg-background border border-outline mt-1"><div className="h-full bg-slate-600 rounded" style={{ width: `${Math.min(100, comp.windowsFps)}%` }} /></div></div>
+              </div>
+              <p className="text-[11px] text-slate-400 mt-3"><strong className="text-white">Conclusión:</strong> {comp.conclusion} (−{comp.latencySavingMs} ms frame-pacing).</p>
+            </div>
+          </div>
+        )}
         <div className="max-w-7xl mx-auto px-4 pb-8">
           <div className="steel-card rounded-lg p-5">
             <h2 className="font-semibold text-white text-sm">Soluciones verificadas ({sols.length}) · Actualizado {game.fechaVerificacion}</h2>
