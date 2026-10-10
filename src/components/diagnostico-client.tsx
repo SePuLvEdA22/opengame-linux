@@ -123,10 +123,10 @@ export function DiagnosticoClient() {
               {matriz.map((m) => (
                 <tr key={m.gameId} className="border-t border-outline">
                   <td className="p-3 text-white">{m.nombre}</td>
-                  <td className="p-3 font-mono">{m.semaforo === "verde" ? "🟢 Verde" : m.semaforo === "amarillo" ? "🟡 Amarillo" : "🔴 Rojo"}</td>
+                  <td className="p-3 font-mono"><span className="inline-flex items-center gap-1.5">{m.semaforo === "verde" ? (<><span aria-hidden className="w-1.5 h-1.5 rounded-full bg-emerald-400" />Verde</>) : m.semaforo === "amarillo" ? (<><span aria-hidden className="w-1.5 h-1.5 rounded-full bg-amber-300" />Amarillo</>) : (<><span aria-hidden className="w-1.5 h-1.5 rounded-full bg-rose-400" />Rojo</>)}</span></td>
                   <td className="p-3 font-mono">{m.fps}</td>
                   <td className="p-3 text-slate-400">{m.explicacion}</td>
-                  <td className="p-3"><a href={`/guia?gameId=${m.gameId}`} className="text-primary hover:underline">Configurar →</a></td>
+                  <td className="p-3"><a href={`/guia?gameId=${m.gameId}`} className="text-primary hover:underline inline-flex items-center gap-1">Configurar <svg aria-hidden viewBox="0 0 16 16" className="h-3.5 w-3.5"><path d="M3 8h9M8 4l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg></a></td>
                 </tr>
               ))}
             </tbody>

@@ -99,7 +99,7 @@ export default async function Ficha({ params }: { params: Promise<{ id: string }
               <ul className="mt-3 space-y-2">
                 {sols.map((s) => (
                   <li key={s.id} className="text-xs bg-background border border-outline rounded p-3">
-                    <span className="text-emerald-400 font-mono">✓ {s.autor} · {s.gpu} · {s.fps} FPS · 👍 {s.votos}</span>
+                    <span className="text-emerald-400 font-mono">✓ {s.autor} · {s.gpu} · {s.fps} FPS · {s.votos} útiles</span>
                     <p className="text-slate-400 mt-1">“{s.texto}”</p>
                   </li>
                 ))}

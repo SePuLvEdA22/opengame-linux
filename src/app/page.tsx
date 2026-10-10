@@ -87,7 +87,7 @@ export default function Home() {
               <details key={f.q} className="steel-card rounded-xl px-4 py-3 group">
                 <summary className="text-sm font-medium text-white cursor-pointer list-none flex justify-between gap-3">
                   {f.q}
-                  <span aria-hidden className="text-primary shrink-0 group-open:rotate-180 transition-transform">▾</span>
+                  <span aria-hidden className="shrink-0 group-open:rotate-180 transition-transform"><svg viewBox="0 0 16 16" className="h-4 w-4 text-primary"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
                 </summary>
                 <p className="text-xs text-slate-400 mt-2 leading-relaxed text-pretty">{f.a}</p>
               </details>

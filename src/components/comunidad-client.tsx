@@ -67,7 +67,7 @@ export function ComunidadClient() {
                 <span>{r.fecha}</span>
                 <span className="flex gap-1">
                   <button onClick={() => votar(r.id)} className="px-2.5 py-1 rounded bg-surface-container-high border border-outline" aria-label={`Marcar útil reporte de ${r.autor}`}>
-                    👍 Útil ({r.votos})
+                    Útil ({r.votos})
                   </button>
                   {isMod && r.estado !== "verificada" && (
                     <button onClick={() => promover(r.id)} className="px-2.5 py-1 rounded bg-emerald-950/50 text-emerald-400 border border-emerald-800/40">

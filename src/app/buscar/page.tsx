@@ -32,9 +32,9 @@ export default async function Buscar({ searchParams }: Props) {
         </div>
         {result.items.length === 0 && <p className="text-sm text-slate-400 mt-8">Sin resultados. Prueba “GTA V”, “CS2” o “Apex”.</p>}
         <nav aria-label="Paginación" className="flex items-center gap-2 mt-8 text-sm">
-          {result.page > 1 && <Link className="px-3 py-1.5 rounded border border-outline bg-surface-container" href={qs(result.page - 1)}>← Anterior</Link>}
+          {result.page > 1 && <Link className="px-3 py-1.5 rounded border border-outline bg-surface-container inline-flex items-center gap-1" href={qs(result.page - 1)}><svg aria-hidden viewBox="0 0 16 16" className="h-3.5 w-3.5"><path d="M13 8H4M8 4L4 8l4 4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Anterior</Link>}
           <span className="font-mono text-xs text-slate-400">Página {result.page} / {result.totalPages}</span>
-          {result.page < result.totalPages && <Link className="px-3 py-1.5 rounded border border-outline bg-surface-container" href={qs(result.page + 1)}>Siguiente →</Link>}
+          {result.page < result.totalPages && <Link className="px-3 py-1.5 rounded border border-outline bg-surface-container inline-flex items-center gap-1" href={qs(result.page + 1)}>Siguiente<svg aria-hidden viewBox="0 0 16 16" className="h-3.5 w-3.5"><path d="M3 8h9M8 4l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg></Link>}
         </nav>
       </main>
     </>

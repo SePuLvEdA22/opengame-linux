@@ -92,8 +92,8 @@ export function GameCard({ game }: { game: import("@/lib/games-data").CatalogGam
       </div>
       <div className="flex items-center justify-between pt-3 border-t border-outline text-xs">
         <span className="text-slate-500 font-mono">{game.reportes} reportes · {game.exitoPct}% éxito</span>
-        <Link href={`/juegos/${game.id}`} className="text-primary hover:brightness-125 font-medium">
-          Ver ficha →
+        <Link href={`/juegos/${game.id}`} className="text-primary hover:brightness-125 font-medium inline-flex items-center gap-1">
+          Ver ficha <svg aria-hidden viewBox="0 0 16 16" className="h-3.5 w-3.5"><path d="M3 8h9M8 4l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
         </Link>
       </div>
     </article>
