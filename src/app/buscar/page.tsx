@@ -22,7 +22,7 @@ export default async function Buscar({ searchParams }: Props) {
   return (
     <>
       <SiteHeader active="buscador" />
-      <main id="contenido" className="pt-16 max-w-7xl mx-auto px-4 py-8">
+      <main id="contenido" className="max-w-7xl mx-auto px-4 py-8">
         <h1 className="text-xl font-semibold text-white">
           {sp.q ? <>Resultados para “{sp.q}” ({result.total})</> : <>Catálogo ({result.total} juegos)</>}
         </h1>

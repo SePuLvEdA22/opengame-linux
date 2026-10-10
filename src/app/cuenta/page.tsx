@@ -6,7 +6,7 @@ export default function CuentaPage() {
   return (
     <>
       <SiteHeader active="cuenta" />
-      <main id="contenido" className="pt-16 max-w-7xl mx-auto px-4 py-8">
+      <main id="contenido" className="max-w-7xl mx-auto px-4 py-8">
         <p className="font-mono text-xs text-primary">Cuenta (demo local · prod Auth.js)</p>
         <h1 className="text-2xl font-semibold text-white mt-1">Mi equipo y mis reportes</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">

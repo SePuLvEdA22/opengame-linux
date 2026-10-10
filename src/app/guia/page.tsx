@@ -9,7 +9,7 @@ export default async function GuiaPage({ searchParams }: { searchParams: Promise
   return (
     <>
       <SiteHeader active="guia" />
-      <main id="contenido" className="pt-16 max-w-7xl mx-auto px-4 py-8">
+      <main id="contenido" className="max-w-7xl mx-auto px-4 py-8">
         <p className="font-mono text-xs text-emerald-400">● SISTEMA DE CONFIGURACIÓN AUTOMÁTICA</p>
         <h1 className="text-2xl font-semibold text-white mt-1">Asistente de Configuración Wine &amp; Proton</h1>
         <div className="mt-6"><GuiaClient initialId={initialId} /></div>

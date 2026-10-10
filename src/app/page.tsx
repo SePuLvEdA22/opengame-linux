@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <SiteHeader active="buscador" />
-      <main id="contenido" className="pt-16">
+      <main id="contenido">
         <div className="w-full bg-surface-container-lowest border-b border-surface-container-high py-2 px-4">
           <p className="max-w-7xl mx-auto text-xs font-mono text-slate-400">
             <span aria-hidden className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2" />

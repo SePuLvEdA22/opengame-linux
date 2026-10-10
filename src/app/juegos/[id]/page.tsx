@@ -17,7 +17,7 @@ export default async function Ficha({ params }: { params: Promise<{ id: string }
   return (
     <>
       <SiteHeader active="buscador" />
-      <main id="contenido" className="pt-16">
+      <main id="contenido">
         <section className="border-b border-outline bg-[#0d1117]">
           <div className="max-w-7xl mx-auto px-4 py-8">
             <p className="font-mono text-xs text-slate-500">BASE DE DATOS / {game.genero.toUpperCase()} / APPID: {game.steamAppid ?? "—"}</p>

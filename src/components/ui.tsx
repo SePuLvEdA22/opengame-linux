@@ -21,31 +21,53 @@ export function StatusBadge({ estado }: { estado: CompatEstado }) {
 export function SiteHeader({ active }: { active?: string }) {
   const link = (href: string, label: string, key: string) =>
     active === key ? (
-      <span aria-current="page" className="px-3 py-1.5 rounded-md text-xs font-medium text-white bg-surface-container-high border border-outline">
+      <span aria-current="page" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-white bg-surface-container-high border border-outline">
+        <span aria-hidden className="w-1.5 h-1.5 rounded-full bg-primary" />
         {label}
       </span>
     ) : (
-      <Link className="px-3 py-1.5 rounded-md text-xs font-medium text-slate-400 hover:text-white hover:bg-surface-container" href={href}>
+      <Link className="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-surface-container border border-transparent hover:border-outline transition-colors" href={href}>
         {label}
       </Link>
     );
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-md border-b border-outline">
-      <div className="h-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
-        <Link href="/" className="flex items-center gap-3">
-          <span aria-hidden className="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-container-high border border-outline font-mono text-primary">{">_"}</span>
-          <span className="font-semibold text-sm text-white">OpenGame<span className="text-primary">Linux</span></span>
-        </Link>
-        <nav aria-label="Principal" className="hidden lg:flex items-center gap-1">
+    <header className="sticky top-0 z-50 mb-6 bg-background/90 backdrop-blur-md border-b border-outline">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="min-h-16 py-3 flex items-center justify-between gap-4">
+          <Link href="/" className="flex items-center gap-3 shrink-0" aria-label="OpenGame Linux inicio">
+            <span aria-hidden className="flex items-center justify-center w-9 h-9 rounded-xl bg-surface-container-high border border-outline font-mono text-sm text-primary">▸_</span>
+            <span className="flex flex-col leading-tight">
+              <span className="font-semibold text-sm text-white">OpenGame<span className="text-primary">Linux</span>
+                <span className="ml-2 font-mono text-[10px] font-medium px-1.5 py-0.5 rounded bg-surface-container text-slate-400 border border-outline align-middle">v2.4</span>
+              </span>
+              <span className="text-[11px] text-slate-500 hidden sm:inline">Tu biblioteca de Windows, optimizada para Linux</span>
+            </span>
+          </Link>
+          <nav aria-label="Principal" className="hidden lg:flex items-center gap-1 bg-surface-container-lowest/60 border border-outline rounded-xl p-1">
+            {link("/", "Buscador", "buscador")}
+            {link("/diagnostico", "Diagnóstico PC", "diag")}
+            {link("/guia", "Guía Proton", "guia")}
+            {link("/comunidad", "Comunidad", "comu")}
+            {link("/adopcion", "Migración", "migra")}
+            {link("/cuenta", "Cuenta", "cuenta")}
+          </nav>
+          <span className="flex items-center gap-2 shrink-0">
+            <span className="hidden xl:flex items-center gap-2 font-mono text-[11px] text-slate-400 border border-outline rounded-lg px-2.5 py-1.5 bg-surface-container">
+              <span className="text-slate-200">VK 1.3</span><span aria-hidden className="text-slate-600">/</span><span className="text-slate-200">GE-Proton 9</span>
+            </span>
+            <Link href="/diagnostico" className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold text-[#0d1117] bg-primary hover:brightness-110 transition">
+              Escanear mi PC
+            </Link>
+          </span>
+        </div>
+        <nav aria-label="Principal móvil" className="lg:hidden flex gap-1 overflow-x-auto pb-3 -mx-1 px-1">
           {link("/", "Buscador", "buscador")}
-          {link("/diagnostico", "Diagnóstico PC", "diag")}
-          {link("/guia", "Guía Proton", "guia")}
+          {link("/diagnostico", "Diagnóstico", "diag")}
+          {link("/guia", "Guía", "guia")}
           {link("/comunidad", "Comunidad", "comu")}
           {link("/adopcion", "Migración", "migra")}
+          {link("/cuenta", "Cuenta", "cuenta")}
         </nav>
-        <Link href="/diagnostico" className="px-3.5 py-1.5 rounded-md text-xs font-medium text-white bg-surface-container-high border border-outline">
-          Escanear mi PC
-        </Link>
       </div>
     </header>
   );

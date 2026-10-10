@@ -7,7 +7,7 @@ export default function AdopcionPage() {
   return (
     <>
       <SiteHeader active="migra" />
-      <main id="contenido" className="pt-16 max-w-7xl mx-auto px-4 py-8">
+      <main id="contenido" className="max-w-7xl mx-auto px-4 py-8">
         <p className="font-mono text-xs text-primary">Guía de adopción · Dual-boot o instalación limpia</p>
         <h1 className="text-2xl font-semibold text-white mt-1">Migra sin perder tu biblioteca</h1>
         <p className="text-sm text-slate-400 max-w-3xl mt-2">

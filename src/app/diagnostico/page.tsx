@@ -7,7 +7,7 @@ export default function DiagnosticoPage() {
   return (
     <>
       <SiteHeader active="diag" />
-      <main id="contenido" className="pt-16 max-w-7xl mx-auto px-4 sm:px-6 py-8">
+      <main id="contenido" className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <p className="font-mono text-xs text-primary">OpenGame Telemetry Engine · v2.4</p>
         <h1 className="text-2xl font-semibold text-white mt-1">Diagnóstico de Hardware y Compatibilidad</h1>
         <p className="text-sm text-slate-400 max-w-3xl mt-2">
