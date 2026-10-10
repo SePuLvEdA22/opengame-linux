@@ -2,13 +2,13 @@
 
 | ID | Requerimiento | Implementación | Estado |
 |----|---------------|----------------|--------|
-| RF-01 | Buscador inmediato | `GET /api/games?q=` + pg_trgm + ISR | Fase 1 |
-| RF-02/03 | Estado + causa + soluciones verificadas | `compatibility_status` + `solutions(estado)` + ficha | Fase 1 |
-| RF-04 | CLI diagnóstico | `cli-diagnostic/opengame-detect.sh` (lspci, vulkaninfo, meminfo) | Fase 0 OK |
-| RF-05 | Motor reglas semáforo | `src/lib/rules-engine.ts` + Vitest | Fase 0 OK |
-| RF-06/07 | Config guiada + copiar + .sh | `proton_profiles` + `GET /api/games/[id]/profile` | Fase 3 |
-| RF-08/10 | Reportes votar + promover a verificada | `user_reports`, `report_votes`, rol moderator | Fase 4 |
-| RF-09 | Guía adopción + distro liviana | `linux_distros` + página estática | Fase 5 |
+| RF-01 | Buscador inmediato | `GET /api/games?q=` + pg_trgm + ISR | OK |
+| RF-02/03 | Estado + causa + soluciones verificadas | `compatibility_status` + `solutions(estado)` + ficha | OK |
+| RF-04 | CLI diagnóstico | `cli-diagnostic/opengame-detect.sh` (lspci, vulkaninfo, meminfo) | OK |
+| RF-05 | Motor reglas semáforo | `src/lib/rules-engine.ts` + Vitest | OK |
+| RF-06/07 | Config guiada + copiar + .sh | `proton_profiles` + `GET /api/games/[id]/profile` | OK |
+| RF-08/10 | Reportes votar + promover a verificada | `user_reports`, `report_votes`, rol moderator | OK |
+| RF-09 | Guía adopción + distro liviana | `linux_distros` + página estática | OK |
 | RNF-01/09 | Lenguaje simple, WCAG AA, teclado | skip-link, focus-visible, labels, contraste Silent Steel | Fase 0 OK |
 | RNF-02 | Ligero, RSC, ISR, mínimo JS | Server Components, sin animaciones pesadas | Transversal |
 | RNF-04 | Paginación | `?page=&limit=` en todas listas | Fase 1+ |
