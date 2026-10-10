@@ -30,7 +30,18 @@ export default async function Buscar({ searchParams }: Props) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
           {result.items.map((g) => <GameCard key={g.id} game={g} />)}
         </div>
-        {result.items.length === 0 && <p className="text-sm text-slate-400 mt-8">Sin resultados. Prueba “GTA V”, “CS2” o “Apex”.</p>}
+        {result.items.length === 0 && (
+          <div role="status" className="steel-card rounded-xl p-5 mt-8 max-w-xl">
+            <p className="text-sm text-white font-medium">Sin resultados para esta búsqueda</p>
+            <p className="text-xs text-slate-400 mt-1">Prueba con estos juegos populares:</p>
+            <p className="flex flex-wrap gap-1.5 mt-3 text-xs">
+              <Link href="/buscar?q=GTA" className="px-2.5 py-1 rounded-md border border-outline bg-surface-container">GTA V</Link>
+              <Link href="/buscar?q=Counter" className="px-2.5 py-1 rounded-md border border-outline bg-surface-container">CS2</Link>
+              <Link href="/buscar?q=Apex" className="px-2.5 py-1 rounded-md border border-outline bg-surface-container">Apex</Link>
+              <Link href="/buscar" className="px-2.5 py-1 rounded-md border border-outline bg-surface-container">Ver catálogo</Link>
+            </p>
+          </div>
+        )}
         <nav aria-label="Paginación" className="flex items-center gap-2 mt-8 text-sm">
           {result.page > 1 && <Link className="px-3 py-1.5 rounded border border-outline bg-surface-container inline-flex items-center gap-1" href={qs(result.page - 1)}><svg aria-hidden viewBox="0 0 16 16" className="h-3.5 w-3.5"><path d="M13 8H4M8 4L4 8l4 4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>Anterior</Link>}
           <span className="font-mono text-xs text-slate-400">Página {result.page} / {result.totalPages}</span>

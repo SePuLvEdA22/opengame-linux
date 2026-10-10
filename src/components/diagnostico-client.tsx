@@ -53,13 +53,13 @@ export function DiagnosticoClient() {
         <div className="flex gap-2 mt-3">
           <a href="/api/cli/download" className="px-4 py-2 rounded-lg bg-primary text-[#0d1117] font-semibold text-xs">Descargar OpenGame-Detect.sh</a>
         </div>
-        <p className="font-mono text-xs text-slate-500 mt-2">Ejecuta: <code className="text-slate-300">sh OpenGame-Detect.sh</code> y pega el JSON:</p>
+        <p className="font-mono text-xs text-slate-500 mt-2" id="cli-ayuda">Ejecuta: <code className="text-slate-300">sh OpenGame-Detect.sh</code> y pega el JSON tal cual sale:</p>
         <label htmlFor="cli-json" className="sr-only">Pegar JSON del detector</label>
-        <textarea id="cli-json" rows={5} value={jsonText} onChange={(e) => setJsonText(e.target.value)}
+        <textarea id="cli-json" rows={5} value={jsonText} onChange={(e) => setJsonText(e.target.value)} aria-describedby="cli-ayuda" placeholder='{"ramGb": 8, ...}'
           className="w-full mt-2 font-mono text-xs bg-background border border-outline rounded-lg p-3 text-emerald-300" />
         <div className="flex gap-2 mt-2">
-          <button onClick={() => { try { enviar(JSON.parse(jsonText)); } catch { setError("JSON inválido"); } }} disabled={loading}
-            className="px-4 py-2 rounded-lg bg-surface-container-high border border-outline text-xs font-medium">
+          <button onClick={() => { try { enviar(JSON.parse(jsonText)); } catch { setError("Ese texto no es un JSON válido. Pega la salida exacta del script o usa «Estimar este PC»."); } }} disabled={loading} aria-busy={loading}
+            className="px-4 py-2 rounded-lg bg-surface-container-high border border-outline text-xs font-medium disabled:opacity-60">
             {loading ? "Analizando…" : "Analizar mi JSON"}
           </button>
           <label className="px-4 py-2 rounded-lg bg-surface-container border border-outline text-xs cursor-pointer">

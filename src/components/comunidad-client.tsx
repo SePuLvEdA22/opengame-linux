@@ -9,6 +9,9 @@ export function ComunidadClient() {
   const [form, setForm] = useState({ autor: "", gpu: "", fps: "50", texto: "" });
   const [msg, setMsg] = useState("");
   const [isMod, setIsMod] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [formError, setFormError] = useState("");
+  const [sending, setSending] = useState(false);
 
   async function votar(id: number) {
     const r = await fetch(`/api/reports/${id}/vote`, { method: "POST" });
@@ -22,17 +25,37 @@ export function ComunidadClient() {
 
   async function crear(e: React.FormEvent) {
     e.preventDefault();
-    const r = await fetch("/api/reports", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ gameId: 1, autor: form.autor, gpu: form.gpu, ramGb: 8, fps: Number(form.fps), texto: form.texto }),
-    });
-    const j = await r.json();
-    if (j.ok) {
-      setItems([j.data, ...items]);
-      setMsg("Publicado como pendiente de revisión. Un moderator lo verificará.");
-      setForm({ autor: "", gpu: "", fps: "50", texto: "" });
-    } else setMsg(j.error ?? "Error");
+    const errs: Record<string, string> = {};
+    if (form.autor.trim().length < 2) errs.autor = "Escribe tu nombre (mínimo 2 letras).";
+    if (form.gpu.trim().length < 2) errs.gpu = "Indica tu tarjeta gráfica, ej. GTX 750 Ti 2GB.";
+    const fps = Number(form.fps);
+    if (!Number.isFinite(fps) || fps < 0 || fps > 500) errs.fps = "FPS entre 0 y 500.";
+    if (form.texto.trim().length < 10) errs.texto = "Cuéntanos un poco más (mínimo 10 caracteres).";
+    setFieldErrors(errs);
+    setFormError("");
+    setMsg("");
+    if (Object.keys(errs).length > 0) {
+      setFormError("Revisa los campos marcados antes de publicar.");
+      return;
+    }
+    setSending(true);
+    try {
+      const r = await fetch("/api/reports", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ gameId: 1, autor: form.autor.trim(), gpu: form.gpu.trim(), ramGb: 8, fps, texto: form.texto.trim() }),
+      });
+      const j = await r.json();
+      if (j.ok) {
+        setItems([j.data, ...items]);
+        setMsg("Publicado como pendiente de revisión. Un moderator lo verificará.");
+        setForm({ autor: "", gpu: "", fps: "50", texto: "" });
+      } else setFormError(j.error ?? "No se pudo publicar. Inténtalo de nuevo.");
+    } catch {
+      setFormError("Sin conexión con el servidor. Revisa tu internet e inténtalo de nuevo.");
+    } finally {
+      setSending(false);
+    }
   }
 
   const shown = items.filter((x) => !filter || x.gpu.toLowerCase().includes(filter.toLowerCase()));
@@ -80,15 +103,29 @@ export function ComunidadClient() {
           );
         })}
       </div>
-      <form onSubmit={crear} className="steel-card rounded-lg p-5 mt-6 max-w-xl">
+      <form onSubmit={crear} noValidate className="steel-card rounded-lg p-5 mt-6 max-w-xl" aria-describedby="reporte-ayuda">
         <h2 className="font-semibold text-white text-sm">Enviar reporte (requiere cuenta en prod)</h2>
+        <p id="reporte-ayuda" className="text-xs text-slate-500 mt-1">Cuéntanos tu caso con tu GPU real: ayuda a quien tenga un equipo parecido.</p>
+        {formError && <p role="alert" className="text-xs text-rose-300 bg-rose-950/30 border border-rose-800/40 rounded p-2 mt-3">{formError}</p>}
         <div className="grid grid-cols-2 gap-2 mt-3 text-xs">
-          <label>GPU<input required value={form.gpu} onChange={(e) => setForm({ ...form, gpu: e.target.value })} placeholder="GTX 750 Ti 2GB" className="mt-1 w-full h-9 rounded bg-background border border-outline px-2" /></label>
-          <label>FPS<input required type="number" value={form.fps} onChange={(e) => setForm({ ...form, fps: e.target.value })} className="mt-1 w-full h-9 rounded bg-background border border-outline px-2" /></label>
+          <label>GPU
+            <input value={form.gpu} onChange={(e) => setForm({ ...form, gpu: e.target.value })} placeholder="GTX 750 Ti 2GB" aria-invalid={!!fieldErrors.gpu} aria-describedby={fieldErrors.gpu ? "err-gpu" : undefined} className="mt-1 w-full h-9 rounded bg-background border border-outline px-2" />
+            {fieldErrors.gpu && <span id="err-gpu" role="alert" className="text-rose-300">{fieldErrors.gpu}</span>}
+          </label>
+          <label>FPS
+            <input type="number" min={0} max={500} value={form.fps} onChange={(e) => setForm({ ...form, fps: e.target.value })} aria-invalid={!!fieldErrors.fps} aria-describedby={fieldErrors.fps ? "err-fps" : undefined} className="mt-1 w-full h-9 rounded bg-background border border-outline px-2" />
+            {fieldErrors.fps && <span id="err-fps" role="alert" className="text-rose-300">{fieldErrors.fps}</span>}
+          </label>
         </div>
-        <label className="block text-xs mt-2">Autor<input required value={form.autor} onChange={(e) => setForm({ ...form, autor: e.target.value })} className="mt-1 w-full h-9 rounded bg-background border border-outline px-2" /></label>
-        <label className="block text-xs mt-2">Comentario<textarea required value={form.texto} onChange={(e) => setForm({ ...form, texto: e.target.value })} rows={3} className="mt-1 w-full rounded bg-background border border-outline p-2" /></label>
-        <button className="mt-3 px-4 py-2 rounded bg-primary text-[#0d1117] font-semibold text-xs" type="submit">Publicar reporte</button>
+        <label className="block text-xs mt-2">Autor
+          <input value={form.autor} onChange={(e) => setForm({ ...form, autor: e.target.value })} aria-invalid={!!fieldErrors.autor} aria-describedby={fieldErrors.autor ? "err-autor" : undefined} className="mt-1 w-full h-9 rounded bg-background border border-outline px-2" />
+          {fieldErrors.autor && <span id="err-autor" role="alert" className="text-rose-300">{fieldErrors.autor}</span>}
+        </label>
+        <label className="block text-xs mt-2">Comentario (mínimo 10 caracteres)
+          <textarea value={form.texto} onChange={(e) => setForm({ ...form, texto: e.target.value })} rows={3} aria-invalid={!!fieldErrors.texto} aria-describedby={fieldErrors.texto ? "err-texto" : undefined} className="mt-1 w-full rounded bg-background border border-outline p-2" />
+          {fieldErrors.texto && <span id="err-texto" role="alert" className="text-rose-300">{fieldErrors.texto}</span>}
+        </label>
+        <button disabled={sending} className="mt-3 px-4 py-2 rounded bg-primary text-[#0d1117] font-semibold text-xs disabled:opacity-60" type="submit">{sending ? "Publicando…" : "Publicar reporte"}</button>
         {msg && <p role="status" className="text-xs text-emerald-400 mt-2">{msg}</p>}
       </form>
     </div>
