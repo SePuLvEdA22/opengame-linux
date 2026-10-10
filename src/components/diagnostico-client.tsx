@@ -111,7 +111,7 @@ export function DiagnosticoClient() {
           <table className="w-full text-left text-xs min-w-[640px]">
             <caption className="text-left p-4 font-semibold text-white">Matriz de rendimiento estimado — 5 títulos auditados</caption>
             <thead><tr className="text-slate-500 font-mono">
-              <th className="p-3">Juego</th><th className="p-3">Semáforo</th><th className="p-3">FPS</th><th className="p-3">Explicación</th>
+              <th className="p-3">Juego</th><th className="p-3">Semáforo</th><th className="p-3">FPS</th><th className="p-3">Explicación</th><th className="p-3">Guía</th>
             </tr></thead>
             <tbody>
               {matriz.map((m) => (
@@ -120,10 +120,12 @@ export function DiagnosticoClient() {
                   <td className="p-3 font-mono">{m.semaforo === "verde" ? "🟢 Verde" : m.semaforo === "amarillo" ? "🟡 Amarillo" : "🔴 Rojo"}</td>
                   <td className="p-3 font-mono">{m.fps}</td>
                   <td className="p-3 text-slate-400">{m.explicacion}</td>
+                  <td className="p-3"><a href={`/guia?gameId=${m.gameId}`} className="text-primary hover:underline">Configurar →</a></td>
                 </tr>
               ))}
             </tbody>
           </table>
+          <p className="p-4 text-[11px] font-mono text-slate-500">¿Equipo justo? Mira <a href="/adopcion" className="text-primary">distros livianas recomendadas</a> (Mint XFCE 4–8 GB, Bazzite 8 GB+, Lubuntu 2–4 GB).</p>
         </div>
       )}
     </div>

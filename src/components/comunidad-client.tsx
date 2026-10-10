@@ -8,10 +8,16 @@ export function ComunidadClient() {
   const [items, setItems] = useState(REPORTS);
   const [form, setForm] = useState({ autor: "", gpu: "", fps: "50", texto: "" });
   const [msg, setMsg] = useState("");
+  const [isMod, setIsMod] = useState(false);
 
   async function votar(id: number) {
     const r = await fetch(`/api/reports/${id}/vote`, { method: "POST" });
     if (r.ok) setItems(items.map((x) => (x.id === id ? { ...x, votos: x.votos + 1 } : x)));
+  }
+
+  async function promover(id: number) {
+    const r = await fetch(`/api/reports/${id}/promote`, { method: "PATCH", headers: { "x-role": "moderator" } });
+    if (r.ok) setItems(items.map((x) => (x.id === id ? { ...x, estado: "verificada" as const } : x)));
   }
 
   async function crear(e: React.FormEvent) {
@@ -33,13 +39,16 @@ export function ComunidadClient() {
 
   return (
     <div>
-      <div className="flex flex-wrap gap-1.5 font-mono text-xs" role="group" aria-label="Filtrar por GPU">
+      <div className="flex flex-wrap items-center gap-1.5 font-mono text-xs" role="group" aria-label="Filtrar por GPU">
         {["", "750", "1050", "rx", "intel"].map((f) => (
           <button key={f} onClick={() => setFilter(f)}
             className={`px-2.5 py-1 rounded border ${filter === f ? "bg-surface-container-high text-white border-primary" : "bg-surface-container text-slate-400 border-outline"}`}>
             {f || "Todas las GPUs"}
           </button>
         ))}
+        <label className="ml-auto flex items-center gap-1 text-slate-400">
+          <input type="checkbox" checked={isMod} onChange={(e) => setIsMod(e.target.checked)} className="accent-[#58a6ff]" /> Vista moderator (demo)
+        </label>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
         {shown.map((r) => {
@@ -56,9 +65,16 @@ export function ComunidadClient() {
               <p className="text-xs text-slate-400 bg-background border border-outline rounded p-3 mt-2">“{r.texto}”</p>
               <div className="flex justify-between items-center mt-3 font-mono text-[11px] text-slate-500">
                 <span>{r.fecha}</span>
-                <button onClick={() => votar(r.id)} className="px-2.5 py-1 rounded bg-surface-container-high border border-outline" aria-label={`Marcar útil reporte de ${r.autor}`}>
-                  👍 Útil ({r.votos})
-                </button>
+                <span className="flex gap-1">
+                  <button onClick={() => votar(r.id)} className="px-2.5 py-1 rounded bg-surface-container-high border border-outline" aria-label={`Marcar útil reporte de ${r.autor}`}>
+                    👍 Útil ({r.votos})
+                  </button>
+                  {isMod && r.estado !== "verificada" && (
+                    <button onClick={() => promover(r.id)} className="px-2.5 py-1 rounded bg-emerald-950/50 text-emerald-400 border border-emerald-800/40">
+                      Verificar
+                    </button>
+                  )}
+                </span>
               </div>
             </article>
           );

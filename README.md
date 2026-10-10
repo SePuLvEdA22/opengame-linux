@@ -38,3 +38,22 @@ sh cli-diagnostic/opengame-detect.sh
 - [ ] Mostrar semáforo verde/amarillo/rojo + fecha actualización
 - [ ] Login demo user/moderator, promover reporte → “Solución verificada”
 - [ ] Trazabilidad RF→código abierta
+
+## Pendientes y roadmap web
+Estado: MVP Fase 0-6 funcional con fallback estático (sin Neon conectado).
+
+Crítico (deploy real):
+- [ ] Vercel import + Neon Marketplace + `DATABASE_URL` + migrate + seed real
+- [ ] Auth.js real (GitHub/Google) + `users.role`; proteger POST reports y PATCH promote
+- [ ] Persistir `user_reports`, `report_votes`, `hardware_profiles` en Neon (hoy memoria)
+- [ ] Rate-limit tabla `rate_limits` en prod (hoy memoria 60/min IP)
+- [ ] Página `/cuenta` (perfil equipo guardado + mis reportes + rol)
+
+Agrandar web (en curso):
+- [x] Ficha con soluciones verificadas + CTA a guía/diagnóstico
+- [x] Diagnóstico → recomienda distro + link a guía con `gameId`
+- [x] Comunidad con botón moderator (demo `x-role`) + filtro GPU + paginación
+- [x] Guía con selector 30 juegos + tweaks + `.sh` descargable
+- [ ] Comparador Windows vs Linux en ficha + telemetría FPS
+- [ ] Import CSV/JSON documentado + Steam API metadatos
+- [ ] Tests integración handlers + Lighthouse/WCAG AA

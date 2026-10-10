@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { SiteHeader, StatusBadge } from "@/components/ui";
 import { CopyButton } from "@/components/copy-button";
 import { getGameById } from "@/lib/search";
+import { verifiedSolutions } from "@/lib/reports";
 
 export const revalidate = 3600;
 
@@ -9,6 +11,7 @@ export default async function Ficha({ params }: { params: Promise<{ id: string }
   const { id } = await params;
   const game = getGameById(Number(id));
   if (!game) notFound();
+  const sols = verifiedSolutions(game.id);
   return (
     <>
       <SiteHeader active="buscador" />
@@ -38,8 +41,10 @@ export default async function Ficha({ params }: { params: Promise<{ id: string }
               <li>Ajustes in-game: DirectX 11, MSAA OFF, FXAA ON (equipos 4–8 GB).</li>
             </ol>
             {game.envVars && (
-              <div className="mt-3">
+              <div className="mt-3 flex flex-wrap gap-2">
                 <CopyButton text={game.envVars} />
+                <Link href={`/guia?gameId=${game.id}`} className="px-3 py-1.5 rounded bg-primary text-[#0d1117] font-semibold text-xs">Abrir guía completa</Link>
+                <Link href="/diagnostico" className="px-3 py-1.5 rounded bg-surface-container-high border border-outline text-xs">¿Mi PC lo corre?</Link>
               </div>
             )}
           </div>
@@ -52,6 +57,23 @@ export default async function Ficha({ params }: { params: Promise<{ id: string }
               <div className="flex justify-between"><dt>Launcher</dt><dd className="text-slate-200">{game.launcher.join(", ")}</dd></div>
             </dl>
           </aside>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 pb-8">
+          <div className="steel-card rounded-lg p-5">
+            <h2 className="font-semibold text-white text-sm">Soluciones verificadas ({sols.length}) · Actualizado {game.fechaVerificacion}</h2>
+            {sols.length === 0 ? (
+              <p className="text-xs text-slate-400 mt-2">Aún sin soluciones verificadas. Sé el primero en <Link href="/comunidad" className="text-primary">reportar</Link>.</p>
+            ) : (
+              <ul className="mt-3 space-y-2">
+                {sols.map((s) => (
+                  <li key={s.id} className="text-xs bg-background border border-outline rounded p-3">
+                    <span className="text-emerald-400 font-mono">✓ {s.autor} · {s.gpu} · {s.fps} FPS · 👍 {s.votos}</span>
+                    <p className="text-slate-400 mt-1">“{s.texto}”</p>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
       </main>
     </>
