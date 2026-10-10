@@ -85,9 +85,9 @@ export default function Home() {
           <TaglineReveal lines={["Tu PC vieja todavía", "tiene partidas por ganar."]} />
         </section>
 
-        <section aria-label="Preguntas frecuentes" className="max-w-3xl mx-auto px-4 pb-12">
+        <section aria-label="Preguntas frecuentes" className="max-w-5xl mx-auto px-4 pb-12">
           <h2 className="font-semibold text-xl text-white text-center">Preguntas de quien migra por primera vez</h2>
-          <div className="mt-4 space-y-2">
+          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2 items-start">
             {FAQS.map((f) => (
               <details key={f.q} className="steel-card rounded-xl px-4 py-3 group">
                 <summary className="text-sm font-medium text-white cursor-pointer list-none flex justify-between gap-3">
