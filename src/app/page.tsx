@@ -1,4 +1,5 @@
 import { SiteHeader, GameCard, StatusBadge } from "@/components/ui";
+import { Reveal, TaglineReveal } from "@/components/reveal";
 import { searchGames } from "@/lib/search";
 import { CATALOG } from "@/lib/games-data";
 import Link from "next/link";
@@ -55,7 +56,7 @@ export default function Home() {
               <label htmlFor="q" className="sr-only">Buscar juego</label>
               <input id="q" name="q" autoComplete="off" placeholder="Escribe un juego (ej: GTA V, Valorant, CS2)…"
                 className="flex-1 h-11 px-4 bg-background text-white placeholder-slate-500 text-sm rounded-lg border border-outline focus:border-primary focus:outline-none" />
-              <button className="h-11 px-5 bg-primary text-[#0d1117] font-semibold text-sm rounded-lg" type="submit">Buscar Compatibilidad</button>
+              <button className="h-11 px-5 bg-primary text-[#0d1117] font-semibold text-sm rounded-lg transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:brightness-110 active:scale-[0.98]" type="submit">Buscar Compatibilidad</button>
             </div>
             <div className="flex flex-wrap gap-1.5 mt-2.5 pt-2.5 border-t border-surface-container-high text-xs">
               <span className="text-slate-500 font-mono mr-1">Filtros:</span>
@@ -71,13 +72,17 @@ export default function Home() {
         </section>
 
         <section aria-label="Simbología de compatibilidad" className="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="steel-card rounded-xl p-5"><StatusBadge estado="funciona" /><p className="text-xs text-slate-400 mt-2">Instalas y juegas, como en Windows. Sin tocar nada raro.</p></div>
-          <div className="steel-card rounded-xl p-5"><StatusBadge estado="funciona_con_ajustes" /><p className="text-xs text-slate-400 mt-2">Funciona copiando un ajuste que te damos listo para pegar.</p></div>
-          <div className="steel-card rounded-xl p-5"><StatusBadge estado="no_funciona" /><p className="text-xs text-slate-400 mt-2">El creador lo bloquea en Linux. Mejor no insistir: hay riesgo de baneo.</p></div>
+          <Reveal><div className="steel-card rounded-xl p-5"><StatusBadge estado="funciona" /><p className="text-xs text-slate-400 mt-2">Instalas y juegas, como en Windows. Sin tocar nada raro.</p></div></Reveal>
+          <Reveal delay={100}><div className="steel-card rounded-xl p-5"><StatusBadge estado="funciona_con_ajustes" /><p className="text-xs text-slate-400 mt-2">Funciona copiando un ajuste que te damos listo para pegar.</p></div></Reveal>
+          <Reveal delay={200}><div className="steel-card rounded-xl p-5"><StatusBadge estado="no_funciona" /><p className="text-xs text-slate-400 mt-2">El creador lo bloquea en Linux. Mejor no insistir: hay riesgo de baneo.</p></div></Reveal>
         </section>
 
         <section aria-label="Juegos populares" className="max-w-7xl mx-auto px-4 pb-12 grid grid-cols-1 md:grid-cols-2 gap-4">
-          {top.items.map((g) => <GameCard key={g.id} game={g} />)}
+          {top.items.map((g, i) => <Reveal key={g.id} delay={(i % 2) * 100}><GameCard game={g} /></Reveal>)}
+        </section>
+
+        <section aria-label="Mensaje destacado" className="max-w-7xl mx-auto px-4 py-12">
+          <TaglineReveal lines={["Tu PC vieja todavía", "tiene partidas por ganar."]} />
         </section>
 
         <section aria-label="Preguntas frecuentes" className="max-w-3xl mx-auto px-4 pb-12">
@@ -99,7 +104,7 @@ export default function Home() {
           <div className="max-w-2xl mx-auto px-4 py-10 text-center">
             <h2 className="font-semibold text-xl text-white">Busca tu juego y sal de dudas</h2>
             <p className="text-sm text-slate-400 mt-1 mb-5">Te decimos si funciona, con qué ajuste y si tu PC lo aguanta.</p>
-            <Link href="/buscar" className="inline-block px-6 py-2.5 bg-primary text-[#0d1117] font-semibold text-sm rounded-lg">
+            <Link href="/buscar" className="inline-block px-6 py-2.5 bg-primary text-[#0d1117] font-semibold text-sm rounded-lg transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:brightness-110 active:scale-[0.98]">
               Ir al buscador
             </Link>
           </div>
