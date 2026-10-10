@@ -10,13 +10,7 @@ export default function Home() {
     <>
       <SiteHeader active="buscador" />
       <main id="contenido">
-        <div className="w-full bg-surface-container-lowest border-b border-surface-container-high py-2 px-4">
-          <p className="max-w-7xl mx-auto text-xs font-mono text-slate-400">
-            <span aria-hidden className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2" />
-            Base de datos en tiempo real · Último reporte: hace 2 min
-          </p>
-        </div>
-        <section className="pt-12 pb-10 px-4 border-b border-surface-container-high text-center">
+        <section className="pt-10 pb-10 px-4 border-b border-surface-container-high text-center">
           <p className="inline-flex px-3 py-1 rounded-full bg-surface-container border border-outline text-xs font-mono text-slate-300 mb-6">
             Optimizado para laptops antiguas, iGPUs y 4–8 GB RAM
           </p>
