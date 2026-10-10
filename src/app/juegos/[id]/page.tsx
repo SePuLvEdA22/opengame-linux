@@ -8,6 +8,17 @@ import { buildComparator } from "@/lib/comparator";
 
 export const revalidate = 3600;
 
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const game = getGameById(Number(id));
+  if (!game) return { title: "Juego no encontrado" };
+  const verdict = game.estado === "funciona" ? "Funciona" : game.estado === "funciona_con_ajustes" ? "Funciona con 1 ajuste" : "No funciona";
+  return {
+    title: `${game.nombre}: ${verdict} en Linux`,
+    description: `${game.fpsEstimado}. Proton ${game.protonVersion}. ${game.reportes} reportes de la comunidad.`,
+  };
+}
+
 export default async function Ficha({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const game = getGameById(Number(id));

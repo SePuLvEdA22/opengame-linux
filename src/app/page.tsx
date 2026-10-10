@@ -105,7 +105,14 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <footer className="border-t border-outline bg-surface-container-lowest py-6 text-center text-xs text-slate-500 font-mono">© 2026 OpenGame Linux · MIT</footer>
+      <footer className="border-t border-outline bg-surface-container-lowest py-6 text-center text-xs text-slate-500 font-mono">
+        <p>© 2026 OpenGame Linux · MIT</p>
+        <p className="mt-2 flex justify-center gap-4">
+          <Link href="/privacidad" className="hover:text-slate-300">Privacidad</Link>
+          <Link href="/terminos" className="hover:text-slate-300">Términos</Link>
+          <Link href="/buscar" className="hover:text-slate-300">Buscador</Link>
+        </p>
+      </footer>
     </>
   );
 }
